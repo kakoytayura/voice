@@ -26,7 +26,6 @@ namespace voice
         private Button btnShowSurvey;
         private Label lblInfo;
 
-        // Тип опроса (1 - опрос, 2 - голосование)
         private int surveyTypeId = 1;
 
         public Form3()
@@ -162,10 +161,8 @@ namespace voice
             form4.Show();
 
             Form10 form10 = new Form10(surveyQuestions);
-            //form10.Show();
 
             Form11 form11 = new Form11(surveyQuestions);
-            //form11.Show();
 
             this.Hide();
         }
