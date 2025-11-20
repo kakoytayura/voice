@@ -11,9 +11,6 @@ using System.Windows.Forms;
 
 namespace voice
 {
-
-    
-
     public partial class Form4 : Form
     {
 
@@ -87,11 +84,9 @@ namespace voice
             {
                 connection.Open();
 
-                // Запрос вопросов с фильтром по QuestionType = 1
                 string queryQuestions = "SELECT QuestionID, QuestionText FROM Questions WHERE QuestionType = ?";
                 OleDbCommand cmdQ = new OleDbCommand(queryQuestions, connection);
 
-                // Явно указываем тип параметра - целое число
                 cmdQ.Parameters.Add("?", System.Data.OleDb.OleDbType.Integer).Value = 1;
 
                 using (OleDbDataReader readerQ = cmdQ.ExecuteReader())
@@ -105,11 +100,9 @@ namespace voice
                             Answers = new List<AnswerOption>()
                         };
 
-                        // Запрос вариантов ответов для конкретного вопроса
                         string queryAnswers = "SELECT AnswerOptionID, AnswerText FROM AnswerOptions WHERE QuestionID = ? ORDER BY AnswerOptionID";
                         OleDbCommand cmdA = new OleDbCommand(queryAnswers, connection);
 
-                        // Тип параметра тоже int
                         cmdA.Parameters.Add("?", System.Data.OleDb.OleDbType.Integer).Value = question.QuestionID;
 
                         using (OleDbDataReader readerA = cmdA.ExecuteReader())
