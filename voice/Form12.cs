@@ -109,7 +109,6 @@ namespace voice
                         questionId = Convert.ToInt32(cmdId.ExecuteScalar());
                     }
 
-                    // Метод для вставки вариантов ответов
                     void InsertAnswerOption(string answer)
                     {
                         if (!string.IsNullOrWhiteSpace(answer))
