@@ -21,8 +21,6 @@ namespace voice
         private void Form6_Load(object sender, EventArgs e)
         {
             InitializeComponent();
-            //LoadQuestionsFromDatabase();
-
         }
         public Form6()
         {
