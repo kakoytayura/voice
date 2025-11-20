@@ -13,23 +13,10 @@ namespace voice
 {
     public partial class Form10 : Form
     {
-        //public Form10(List<Question> questions)
-        //{
-        //    InitializeComponent();
-
-        //    this.questions = questions;
-        //    this.Width = 400;
-        //    this.Height = 600;
-        //    this.Text = "Пройти опрос";
-
-        //    InitializeSurveyUI();
-        //}
-
         public class Question
         {
             public string Text { get; set; }
             public int QuestionID { get; set; }
-            //public List<string> Answers { get; set; } = new List<string>();
             public List<AnswerOption> Answers { get; set; } = new List<AnswerOption>();
         }
         public class AnswerOption
@@ -83,11 +70,9 @@ namespace voice
             {
                 connection.Open();
 
-                // Запрос вопросов с фильтром по QuestionType = 1
                 string queryQuestions = "SELECT QuestionID, QuestionText FROM Questions WHERE QuestionType = ?";
                 OleDbCommand cmdQ = new OleDbCommand(queryQuestions, connection);
 
-                // Явно указываем тип параметра - целое число
                 cmdQ.Parameters.Add("?", System.Data.OleDb.OleDbType.Integer).Value = 1;
 
                 using (OleDbDataReader readerQ = cmdQ.ExecuteReader())
@@ -101,11 +86,9 @@ namespace voice
                             Answers = new List<AnswerOption>()
                         };
 
-                        // Запрос вариантов ответов для конкретного вопроса
                         string queryAnswers = "SELECT AnswerOptionID, AnswerText FROM AnswerOptions WHERE QuestionID = ? ORDER BY AnswerOptionID";
                         OleDbCommand cmdA = new OleDbCommand(queryAnswers, connection);
 
-                        // Тип параметра тоже int
                         cmdA.Parameters.Add("?", System.Data.OleDb.OleDbType.Integer).Value = question.QuestionID;
 
                         using (OleDbDataReader readerA = cmdA.ExecuteReader())
